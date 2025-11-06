@@ -19,14 +19,12 @@
 		50D44D3F2C3FA59500CF6A69 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 50D44D3E2C3FA59500CF6A69 /* Kingfisher */; };
 		50D44D512C3FC85F00CF6A69 /* AnyCodable in Frameworks */ = {isa = PBXBuildFile; productRef = 50D44D502C3FC85F00CF6A69 /* AnyCodable */; };
 		50E28B812C40BA52007891E0 /* ColorfulX in Frameworks */ = {isa = PBXBuildFile; productRef = 50E28B802C40BA52007891E0 /* ColorfulX */; };
-		50E6C5682C40CB7500460DB5 /* Certificates in Resources */ = {isa = PBXBuildFile; fileRef = 50E6C5672C40CB7500460DB5 /* Certificates */; };
 		80CD64ED2C42AA2C0073E206 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 80CD64EC2C42AA2C0073E206 /* KeychainAccess */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		507952E92E78740900954B8A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		50D44D022C3F91F700CF6A69 /* Asspp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Asspp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		50E6C5672C40CB7500460DB5 /* Certificates */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Certificates; path = Resources/Certificates; sourceTree = SOURCE_ROOT; };
 		80CD64EA2C42A7E80073E206 /* Asspp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Asspp.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -90,20 +88,19 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		50D44D042C3F91F700CF6A69 /* Asspp */ = {
-			isa = PBXGroup;
-			children = (
-				507952E92E78740900954B8A /* Info.plist */,
-				80CD64EA2C42A7E80073E206 /* Asspp.entitlements */,
-				5081AB832E77CD1800F6E9F0 /* App */,
-				5081AB952E77CD1800F6E9F0 /* Backend */,
-				5081AB982E77CD1800F6E9F0 /* Extension */,
-				5081ABAF2E77CD1800F6E9F0 /* Interface */,
-				50E6C5672C40CB7500460DB5 /* Certificates */,
-			);
-			path = Asspp;
-			sourceTree = "<group>";
-		};
+        50D44D042C3F91F700CF6A69 /* Asspp */ = {
+            isa = PBXGroup;
+            children = (
+                507952E92E78740900954B8A /* Info.plist */,
+                80CD64EA2C42A7E80073E206 /* Asspp.entitlements */,
+                5081AB832E77CD1800F6E9F0 /* App */,
+                5081AB952E77CD1800F6E9F0 /* Backend */,
+                5081AB982E77CD1800F6E9F0 /* Extension */,
+                5081ABAF2E77CD1800F6E9F0 /* Interface */,
+            );
+            path = Asspp;
+            sourceTree = "<group>";
+        };
 		50D44D172C3F92A100CF6A69 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -200,14 +197,13 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		50D44D002C3F91F700CF6A69 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				50E6C5682C40CB7500460DB5 /* Certificates in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
+        50D44D002C3F91F700CF6A69 /* Resources */ = {
+            isa = PBXResourcesBuildPhase;
+            buildActionMask = 2147483647;
+            files = (
+            );
+            runOnlyForDeploymentPostprocessing = 0;
+        };
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */

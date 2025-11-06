@@ -6,42 +6,34 @@
 //
 
 import Foundation
+import NIOCore
 import NIOSSL
-import NIOTLS
 import Vapor
 
 extension Installer {
-    static let sni = "app.localhost.qaq.wiki"
-    static let pem = Bundle.main.url(
-        forResource: "localhost.qaq.wiki-key",
-        withExtension: "pem",
-        subdirectory: "Certificates/localhost.qaq.wiki"
-    )
-    static let crt = Bundle.main.url(
-        forResource: "localhost.qaq.wiki",
-        withExtension: "pem",
-        subdirectory: "Certificates/localhost.qaq.wiki"
-    )
-    static let ca = Bundle.main.url(
-        forResource: "rootCA",
-        withExtension: "pem",
-        subdirectory: "Certificates/localhost.qaq.wiki"
-    )!
-
-    static var caURL: URL = .init(fileURLWithPath: "/tmp/")
-    static var caInstaller: Installer?
+    static let sni = InstallerCertificates.defaultServerName
 
     static func setupTLS() throws -> TLSConfiguration {
-        guard let crt, let pem else {
-            throw NSError(domain: "Installer", code: 0, userInfo: [
-                NSLocalizedDescriptionKey: "Failed to load ssl certificates",
-            ])
-        }
-        return try TLSConfiguration.makeServerConfiguration(
-            certificateChain: NIOSSLCertificate
-                .fromPEMFile(crt.path)
-                .map { NIOSSLCertificateSource.certificate($0) },
-            privateKey: NIOSSLPrivateKeySource.privateKey(NIOSSLPrivateKey(file: pem.path, format: .pem))
+        let defaultBundle = try InstallerCertificates.certificateBundle(for: InstallerCertificates.defaultServerName)
+
+        var configuration = TLSConfiguration.makeServerConfiguration(
+            certificateChain: defaultBundle.chain.map { .certificate($0) },
+            privateKey: .privateKey(defaultBundle.privateKey)
         )
+
+        configuration.sslContextCallback = { values, promise in
+            let requestedHost = values.serverHostname
+            do {
+                let bundle = try InstallerCertificates.certificateBundle(for: requestedHost)
+                var override = NIOSSLContextConfigurationOverride()
+                override.certificateChain = bundle.chain.map { .certificate($0) }
+                override.privateKey = .privateKey(bundle.privateKey)
+                promise.succeed(override)
+            } catch {
+                promise.fail(error)
+            }
+        }
+
+        return configuration
     }
 }

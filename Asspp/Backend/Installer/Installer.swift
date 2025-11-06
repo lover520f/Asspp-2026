@@ -17,6 +17,7 @@ class Installer: Identifiable, ObservableObject, @unchecked Sendable {
     let app: Application
     let archive: AppStore.AppPackage
     let port = Int.random(in: 4000 ... 8000)
+    static var caInstaller: Installer?
 
     enum Status {
         case ready
@@ -38,6 +39,11 @@ class Installer: Identifiable, ObservableObject, @unchecked Sendable {
 
         app.get("*") { [weak self] req in
             guard let self else { return Response(status: .badGateway) }
+            let hostContext = InstallerHostResolver.requestHost(
+                from: req,
+                defaultHost: InstallerCertificates.defaultServerName,
+                port: self.port
+            )
 
             switch req.url.path {
             case "/ping":
@@ -45,28 +51,28 @@ class Installer: Identifiable, ObservableObject, @unchecked Sendable {
             case "/", "/index.html":
                 return Response(status: .ok, version: req.version, headers: [
                     "Content-Type": "text/html",
-                ], body: .init(string: indexHtml))
-            case plistEndpoint.path:
+                ], body: .init(string: indexHTML(for: hostContext)))
+            case plistPath:
                 await MainActor.run { self.status = .sendingManifest }
-                logger.info("sending manifest for installer id: \(self.id)")
+                logger.info("sending manifest for installer id: \(self.id) host: \(hostContext.host)")
                 return Response(status: .ok, version: req.version, headers: [
                     "Content-Type": "text/xml",
-                ], body: .init(data: installManifestData))
-            case displayImageSmallEndpoint.path:
+                ], body: .init(data: installManifestData(for: hostContext)))
+            case displayImageSmallPath:
                 await MainActor.run { self.status = .sendingManifest }
-                logger.info("sending small display image for installer id: \(self.id)")
+                logger.info("sending small display image for installer id: \(self.id) host: \(hostContext.host)")
                 return Response(status: .ok, version: req.version, headers: [
                     "Content-Type": "image/png",
                 ], body: .init(data: displayImageSmallData))
-            case displayImageLargeEndpoint.path:
+            case displayImageLargePath:
                 await MainActor.run { self.status = .sendingManifest }
-                logger.info("sending large display image for installer id: \(self.id)")
+                logger.info("sending large display image for installer id: \(self.id) host: \(hostContext.host)")
                 return Response(status: .ok, version: req.version, headers: [
                     "Content-Type": "image/png",
                 ], body: .init(data: displayImageLargeData))
-            case payloadEndpoint.path:
+            case payloadPath:
                 await MainActor.run { self.status = .sendingPayload }
-                logger.info("starting payload transfer for installer id: \(self.id)")
+                logger.info("starting payload transfer for installer id: \(self.id) host: \(hostContext.host)")
 
                 let result = try await req.fileio.asyncStreamFile(
                     at: packagePath.path,
@@ -84,17 +90,17 @@ class Installer: Identifiable, ObservableObject, @unchecked Sendable {
                 return result
             default:
                 // 404
-                logger.warning("unknown request path: \(req.url.path) for installer id: \(self.id)")
+                logger.warning("unknown request path: \(req.url.path) for installer id: \(self.id) host: \(hostContext.host)")
                 return Response(status: .notFound)
             }
         }
 
         try app.server.start()
-        logger.info("installer init at port \(port) for sni \(Self.sni)")
+        logger.info("installer init at port \(port) with default host \(InstallerCertificates.defaultServerName)")
     }
 
-    // avoid misleading name, default parm Installer.ca is not used
     init(certificateAtPath: String) async throws {
+        try InstallerCertificates.bootstrap()
         precondition(Installer.caInstaller == nil)
 
         let id: UUID = .init()
@@ -126,13 +132,7 @@ class Installer: Identifiable, ObservableObject, @unchecked Sendable {
             )
         }
 
-        var comps = URLComponents()
-        comps.scheme = "http"
-        comps.host = "localhost"
-        comps.port = port
-        comps.path = "/ca.crt"
-        let url = comps.url!
-        Installer.caURL = url
+        InstallerCertificates.updateDownloadServer(port: port)
 
         try app.server.start()
 
@@ -151,6 +151,10 @@ class Installer: Identifiable, ObservableObject, @unchecked Sendable {
             try await self.app.asyncShutdown()
             withExtendedLifetime(self) { _ in }
             withExtendedLifetime(self.app) { _ in }
+            if Self.caInstaller === self {
+                InstallerCertificates.resetDownloadURL()
+                Self.caInstaller = nil
+            }
         }
     }
 }

@@ -21,7 +21,7 @@ extension Installer {
         app.threadPool = .init(numberOfThreads: 1)
 
         if secured { app.http.server.configuration.tlsConfiguration = try Self.setupTLS() }
-        app.http.server.configuration.hostname = Self.sni
+        app.http.server.configuration.hostname = nil
         app.http.server.configuration.tcpNoDelay = true
 
         app.http.server.configuration.address = .hostname("0.0.0.0", port: port)

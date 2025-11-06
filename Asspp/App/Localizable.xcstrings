@@ -2375,7 +2375,7 @@
         }
       }
     },
-    "Your accounts are saved in your Keychain and will be synced across devices with the same iCloud account signed in." : {
+      "Your accounts are saved in your Keychain and will be synced across devices with the same iCloud account signed in." : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2387,6 +2387,406 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "您的账户保存在钥匙串中，并将在登录相同 iCloud 账户的设备之间同步。"
+          }
+        }
+      },
+      "QR Installer" : {
+        "localizations" : {
+          "en" : {
+            "stringUnit" : {
+              "state" : "translated",
+              "value" : "QR Installer"
+            }
+          },
+          "zh-Hans" : {
+            "stringUnit" : {
+              "state" : "translated",
+              "value" : "二维码安装"
+            }
+          }
+        }
+      },
+      "Step" : {
+        "localizations" : {
+          "en" : {
+            "stringUnit" : {
+              "state" : "translated",
+              "value" : "Step"
+            }
+          },
+          "zh-Hans" : {
+            "stringUnit" : {
+              "state" : "translated",
+              "value" : "步骤"
+            }
+          }
+        }
+      },
+      "Certificate" : {
+        "localizations" : {
+          "en" : {
+            "stringUnit" : {
+              "state" : "translated",
+              "value" : "Certificate"
+            }
+          },
+          "zh-Hans" : {
+            "stringUnit" : {
+              "state" : "translated",
+              "value" : "证书"
+            }
+          }
+        }
+      },
+      "Install" : {
+        "localizations" : {
+          "en" : {
+            "stringUnit" : {
+              "state" : "translated",
+              "value" : "Install"
+            }
+          },
+          "zh-Hans" : {
+            "stringUnit" : {
+              "state" : "translated",
+              "value" : "安装"
+            }
+          }
+        }
+      },
+      "Suggested" : {
+        "localizations" : {
+          "en" : {
+            "stringUnit" : {
+              "state" : "translated",
+              "value" : "Suggested"
+            }
+          },
+          "zh-Hans" : {
+            "stringUnit" : {
+              "state" : "translated",
+              "value" : "建议"
+            }
+          }
+        }
+      },
+      "Manual" : {
+        "localizations" : {
+          "en" : {
+            "stringUnit" : {
+              "state" : "translated",
+              "value" : "Manual"
+            }
+          },
+          "zh-Hans" : {
+            "stringUnit" : {
+              "state" : "translated",
+              "value" : "手动"
+            }
+          }
+        }
+      },
+      "Select Host" : {
+        "localizations" : {
+          "en" : {
+            "stringUnit" : {
+              "state" : "translated",
+              "value" : "Select Host"
+            }
+          },
+          "zh-Hans" : {
+            "stringUnit" : {
+              "state" : "translated",
+              "value" : "选择主机"
+            }
+          }
+        }
+      },
+      "Mode" : {
+        "localizations" : {
+          "en" : {
+            "stringUnit" : {
+              "state" : "translated",
+              "value" : "Mode"
+            }
+          },
+          "zh-Hans" : {
+            "stringUnit" : {
+              "state" : "translated",
+              "value" : "模式"
+            }
+          }
+        }
+      },
+      "No network addresses detected. Make sure Wi-Fi or Ethernet is connected." : {
+        "localizations" : {
+          "en" : {
+            "stringUnit" : {
+              "state" : "translated",
+              "value" : "No network addresses detected. Make sure Wi-Fi or Ethernet is connected."
+            }
+          },
+          "zh-Hans" : {
+            "stringUnit" : {
+              "state" : "translated",
+              "value" : "未检测到网络地址。请确认已连接 Wi-Fi 或以太网。"
+            }
+          }
+        }
+      },
+      "Refresh Hosts" : {
+        "localizations" : {
+          "en" : {
+            "stringUnit" : {
+              "state" : "translated",
+              "value" : "Refresh Hosts"
+            }
+          },
+          "zh-Hans" : {
+            "stringUnit" : {
+              "state" : "translated",
+              "value" : "刷新主机"
+            }
+          }
+        }
+      },
+      "Hostname or IP" : {
+        "localizations" : {
+          "en" : {
+            "stringUnit" : {
+              "state" : "translated",
+              "value" : "Hostname or IP"
+            }
+          },
+          "zh-Hans" : {
+            "stringUnit" : {
+              "state" : "translated",
+              "value" : "主机名或 IP"
+            }
+          }
+        }
+      },
+      "Enter an address reachable from the device you plan to install on." : {
+        "localizations" : {
+          "en" : {
+            "stringUnit" : {
+              "state" : "translated",
+              "value" : "Enter an address reachable from the device you plan to install on."
+            }
+          },
+          "zh-Hans" : {
+            "stringUnit" : {
+              "state" : "translated",
+              "value" : "请输入目标设备可以访问的地址。"
+            }
+          }
+        }
+      },
+      "Step 1: Install Certificate" : {
+        "localizations" : {
+          "en" : {
+            "stringUnit" : {
+              "state" : "translated",
+              "value" : "Step 1: Install Certificate"
+            }
+          },
+          "zh-Hans" : {
+            "stringUnit" : {
+              "state" : "translated",
+              "value" : "步骤一：安装证书"
+            }
+          }
+        }
+      },
+      "Scan this code with the target device to download the installer certificate, then mark it as trusted in Settings." : {
+        "localizations" : {
+          "en" : {
+            "stringUnit" : {
+              "state" : "translated",
+              "value" : "Scan this code with the target device to download the installer certificate, then mark it as trusted in Settings."
+            }
+          },
+          "zh-Hans" : {
+            "stringUnit" : {
+              "state" : "translated",
+              "value" : "使用目标设备扫描此二维码以下载安装证书，并在“设置”中将其标记为已信任。"
+            }
+          }
+        }
+      },
+      "Current host" : {
+        "localizations" : {
+          "en" : {
+            "stringUnit" : {
+              "state" : "translated",
+              "value" : "Current host"
+            }
+          },
+          "zh-Hans" : {
+            "stringUnit" : {
+              "state" : "translated",
+              "value" : "当前主机"
+            }
+          }
+        }
+      },
+      "Open" : {
+        "localizations" : {
+          "en" : {
+            "stringUnit" : {
+              "state" : "translated",
+              "value" : "Open"
+            }
+          },
+          "zh-Hans" : {
+            "stringUnit" : {
+              "state" : "translated",
+              "value" : "打开"
+            }
+          }
+        }
+      },
+      "Copy" : {
+        "localizations" : {
+          "en" : {
+            "stringUnit" : {
+              "state" : "translated",
+              "value" : "Copy"
+            }
+          },
+          "zh-Hans" : {
+            "stringUnit" : {
+              "state" : "translated",
+              "value" : "复制"
+            }
+          }
+        }
+      },
+      "After installing, go to Settings → General → About → Certificate Trust Settings and enable full trust for the certificate." : {
+        "localizations" : {
+          "en" : {
+            "stringUnit" : {
+              "state" : "translated",
+              "value" : "After installing, go to Settings → General → About → Certificate Trust Settings and enable full trust for the certificate."
+            }
+          },
+          "zh-Hans" : {
+            "stringUnit" : {
+              "state" : "translated",
+              "value" : "安装后，请前往“设置”→“通用”→“关于本机”→“证书信任设置”，并启用对此证书的完全信任。"
+            }
+          }
+        }
+      },
+      "Step 2: Install Application" : {
+        "localizations" : {
+          "en" : {
+            "stringUnit" : {
+              "state" : "translated",
+              "value" : "Step 2: Install Application"
+            }
+          },
+          "zh-Hans" : {
+            "stringUnit" : {
+              "state" : "translated",
+              "value" : "步骤二：安装应用"
+            }
+          }
+        }
+      },
+      "Waiting for device to scan the QR code" : {
+        "localizations" : {
+          "en" : {
+            "stringUnit" : {
+              "state" : "translated",
+              "value" : "Waiting for device to scan the QR code"
+            }
+          },
+          "zh-Hans" : {
+            "stringUnit" : {
+              "state" : "translated",
+              "value" : "等待设备扫描二维码"
+            }
+          }
+        }
+      },
+      "Sending manifest…" : {
+        "localizations" : {
+          "en" : {
+            "stringUnit" : {
+              "state" : "translated",
+              "value" : "Sending manifest…"
+            }
+          },
+          "zh-Hans" : {
+            "stringUnit" : {
+              "state" : "translated",
+              "value" : "正在发送 manifest…"
+            }
+          }
+        }
+      },
+      "Transferring payload…" : {
+        "localizations" : {
+          "en" : {
+            "stringUnit" : {
+              "state" : "translated",
+              "value" : "Transferring payload…"
+            }
+          },
+          "zh-Hans" : {
+            "stringUnit" : {
+              "state" : "translated",
+              "value" : "正在传输安装包…"
+            }
+          }
+        }
+      },
+      "Install completed" : {
+        "localizations" : {
+          "en" : {
+            "stringUnit" : {
+              "state" : "translated",
+              "value" : "Install completed"
+            }
+          },
+          "zh-Hans" : {
+            "stringUnit" : {
+              "state" : "translated",
+              "value" : "安装完成"
+            }
+          }
+        }
+      },
+      "Keep this screen visible while the install is in progress." : {
+        "localizations" : {
+          "en" : {
+            "stringUnit" : {
+              "state" : "translated",
+              "value" : "Keep this screen visible while the install is in progress."
+            }
+          },
+          "zh-Hans" : {
+            "stringUnit" : {
+              "state" : "translated",
+              "value" : "安装过程中请保持此屏幕处于显示状态。"
+            }
+          }
+        }
+      },
+      "QR code" : {
+        "localizations" : {
+          "en" : {
+            "stringUnit" : {
+              "state" : "translated",
+              "value" : "QR code"
+            }
+          },
+          "zh-Hans" : {
+            "stringUnit" : {
+              "state" : "translated",
+              "value" : "二维码"
+            }
           }
         }
       }

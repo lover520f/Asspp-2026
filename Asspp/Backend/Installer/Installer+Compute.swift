@@ -9,84 +9,72 @@ import ApplePackage
 import Foundation
 
 extension Installer {
-    var plistEndpoint: URL {
-        var comps = URLComponents()
-        comps.scheme = "https"
-        comps.host = Self.sni
-        comps.path = "/\(id).plist"
-        comps.port = port
-        return comps.url!
+    var plistPath: String { "/\(id).plist" }
+
+    var payloadPath: String { "/\(id).ipa" }
+
+    var displayImageSmallPath: String { "/app57x57.png" }
+
+    var displayImageLargePath: String { "/app512x512.png" }
+
+    func plistEndpoint(for host: InstallerHost) -> URL {
+        host.httpsURL(path: plistPath)
     }
 
-    var payloadEndpoint: URL {
-        var comps = URLComponents()
-        comps.scheme = "https"
-        comps.host = Self.sni
-        comps.path = "/\(id).ipa"
-        comps.port = port
-        return comps.url!
+    func payloadEndpoint(for host: InstallerHost) -> URL {
+        host.httpsURL(path: payloadPath)
     }
 
-    var iTunesLink: URL {
+    func iTunesLink(for host: InstallerHost) -> URL {
+        let manifestURL = plistEndpoint(for: host)
         var comps = URLComponents()
         comps.scheme = "itms-services"
         comps.path = "/"
         comps.queryItems = [
             URLQueryItem(name: "action", value: "download-manifest"),
-            URLQueryItem(name: "url", value: plistEndpoint.absoluteString),
+            URLQueryItem(name: "url", value: manifestURL.absoluteString),
         ]
-        comps.port = port
         return comps.url!
     }
 
-    var displayImageSmallEndpoint: URL {
-        var comps = URLComponents()
-        comps.scheme = "https"
-        comps.host = Self.sni
-        comps.path = "/app57x57.png"
-        comps.port = port
-        return comps.url!
+    func displayImageSmallEndpoint(for host: InstallerHost) -> URL {
+        host.httpsURL(path: displayImageSmallPath)
     }
 
     var displayImageSmallData: Data {
         createWhite(57)
     }
 
-    var displayImageLargeEndpoint: URL {
-        var comps = URLComponents()
-        comps.scheme = "https"
-        comps.host = Self.sni
-        comps.path = "/app512x512.png"
-        comps.port = port
-        return comps.url!
+    func displayImageLargeEndpoint(for host: InstallerHost) -> URL {
+        host.httpsURL(path: displayImageLargePath)
     }
 
     var displayImageLargeData: Data {
         createWhite(512)
     }
 
-    var indexHtml: String {
+    func indexHTML(for host: InstallerHost) -> String {
         """
-        <html> <head> <meta http-equiv="refresh" content="0;url=\(iTunesLink.absoluteString)"> </head> </html>
+        <html> <head> <meta http-equiv="refresh" content="0;url=\(iTunesLink(for: host).absoluteString)"> </head> </html>
         """
     }
 
-    var installManifest: [String: Any] {
+    func installManifest(for host: InstallerHost) -> [String: Any] {
         [
             "items": [
                 [
                     "assets": [
                         [
                             "kind": "software-package",
-                            "url": payloadEndpoint.absoluteString,
+                            "url": payloadEndpoint(for: host).absoluteString,
                         ],
                         [
                             "kind": "display-image",
-                            "url": displayImageSmallEndpoint.absoluteString,
+                            "url": displayImageSmallEndpoint(for: host).absoluteString,
                         ],
                         [
                             "kind": "full-size-image",
-                            "url": displayImageLargeEndpoint.absoluteString,
+                            "url": displayImageLargeEndpoint(for: host).absoluteString,
                         ],
                     ],
                     "metadata": [
@@ -100,11 +88,15 @@ extension Installer {
         ]
     }
 
-    var installManifestData: Data {
+    func installManifestData(for host: InstallerHost) -> Data {
         (try? PropertyListSerialization.data(
-            fromPropertyList: installManifest,
+            fromPropertyList: installManifest(for: host),
             format: .xml,
             options: .zero
         )) ?? .init()
+    }
+
+    func availableHosts() -> [InstallerHost] {
+        InstallerHostResolver.availableHosts(port: port)
     }
 }

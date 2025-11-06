@@ -71,7 +71,7 @@ struct SettingView: View {
             #if canImport(UIKit)
                 Section {
                     Button("Install Certificate") {
-                        UIApplication.shared.open(Installer.caURL)
+                        UIApplication.shared.open(InstallerCertificates.caURL)
                     }
                 } header: {
                     Text("SSL")
@@ -83,7 +83,7 @@ struct SettingView: View {
             #if canImport(AppKit) && !canImport(UIKit)
                 Section {
                     Button("Show Certificate in Finder") {
-                        NSWorkspace.shared.activateFileViewerSelecting([Installer.ca])
+                        NSWorkspace.shared.activateFileViewerSelecting([InstallerCertificates.caFileURL])
                     }
                 } header: {
                     Text("SSL")

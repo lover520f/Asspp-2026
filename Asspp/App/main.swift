@@ -69,9 +69,19 @@ _ = ProcessInfo.processInfo.hostName
 DiggerManager.shared.maxConcurrentTasksCount = 3
 DiggerManager.shared.startDownloadImmediately = true
 
+do {
+    try InstallerCertificates.bootstrap()
+} catch {
+    logger.error("Failed to bootstrap installer certificates: \(String(describing: error))")
+}
+
 #if os(iOS)
     Task.detached {
-        _ = try await Installer(certificateAtPath: Installer.ca.path)
+        do {
+            _ = try await Installer(certificateAtPath: InstallerCertificates.caFileURL.path)
+        } catch {
+            logger.error("Failed to start CA installer: \(String(describing: error))")
+        }
     }
 #endif
 
